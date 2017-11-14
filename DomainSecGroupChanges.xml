@@ -1,5 +1,5 @@
 <Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
-<SubscriptionId>Domain Group Changes</SubscriptionId>
+<SubscriptionId>Domain Security Group Changes</SubscriptionId>
 <SubscriptionType>SourceInitiated</SubscriptionType>
 <Description>Events logging Security Group membership modifications in the Domain</Description>
 <Enabled>True</Enabled>
@@ -10,7 +10,7 @@
 <Query Id="0" Path="Security">
 <!-- Domain Security Group membership changed -->
 <Select Path="Security">
-*[System[or (EventID='4756') or (EventID='4757') or (EventID='4728') or (EventID='4729') or (EventID='4733')]]
+*[System[(EventID='4756') or (EventID='4757') or (EventID='4728') or (EventID='4729') or (EventID='4733')]]
 </Select>
 </Query>
 </QueryList>]]>
