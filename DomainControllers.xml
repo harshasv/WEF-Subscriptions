@@ -1,0 +1,35 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+<SubscriptionId>Domain Controller Events</SubscriptionId>
+<SubscriptionType>SourceInitiated</SubscriptionType>
+<Description>Important Domain Controller Events</Description>
+<Enabled>True</Enabled>
+<Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+<ConfigurationMode>MinLatency</ConfigurationMode>
+<Query>
+<![CDATA[<QueryList>
+<Query Id="0" Path="Security">
+<!-- New Service Installed -->
+<Select Path="System">*[System[(EventID='7045')]]</Select>
+<!-- Member Added or Removed from an AD Domain Local, Universal or  Global Security Group -->
+<Select Path="Security">
+(*[EventData[Data[@Name="TargetUserName"] = "Administrators"]]) or
+(*[EventData[Data[@Name="TargetUserName"] = "Domain Admins"]]) or
+(*[EventData[Data[@Name="TargetUserName"] = "Schema Admins"]]) or
+(*[EventData[Data[@Name="TargetUserName"] = "Enterprise Admins"]]) or
+(*[EventData[Data[@Name="TargetUserName"] =  "Print Operators"]]) or
+(*[EventData[Data[@Name="TargetUserName"] = "Server Operators"]]) or
+(*[EventData[Data[@Name="TargetUserName"] = "Backup Operators"]])
+and
+*[System[(EventID='4732') or (EventID='4733') or (EventID='4756') or (EventID='4757') or (EventID='4728') or (EventID='4729')]]
+</Select>
+</Query>
+</QueryList>]]>
+</Query>
+<ReadExistingEvents>True</ReadExistingEvents>
+<TransportName>http</TransportName>
+<ContentFormat>RenderedText</ContentFormat>
+<Locale Language="en-US"/>
+<LogFile>ForwardedEvents</LogFile>
+<AllowedSourceNonDomainComputers></AllowedSourceNonDomainComputers>
+<AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>
