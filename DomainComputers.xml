@@ -16,7 +16,7 @@ and
 </Select>
 <!-- Local user created or deleted -->
 <Select Path="Security">*[System[(EventID='4720') or (EventID='4726')]]</Select>
-<!-- New Service Installed -->
+<!-- New Service Installed. Excluding Rubrik VSS Provider installed with every backup job-->
 <Select Path="System">*[System[(EventID='7045')]] and *[EventData[Data[@Name='ServiceName'] != 'RubrikVSSProvider']]</Select>
 </Query>
 </QueryList>]]>
