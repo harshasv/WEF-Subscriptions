@@ -1,7 +1,7 @@
 <Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
 <SubscriptionId>Domain Computer Events</SubscriptionId>
 <SubscriptionType>SourceInitiated</SubscriptionType>
-<Description>Important Domain Controller Events</Description>
+<Description>Domain Computer Events - local user, administrators group, service installed</Description>
 <Enabled>True</Enabled>
 <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
 <ConfigurationMode>MinLatency</ConfigurationMode>
@@ -17,6 +17,7 @@ and
 <!-- Local user created or deleted -->
 <Select Path="Security">*[System[(EventID='4720') or (EventID='4726')]]</Select>
 <!-- New Service Installed -->
+<Select Path="System">*[System[(EventID='7045')]] and *[EventData[Data[@Name='ServiceName'] != 'RubrikVSSProvider']]</Select>
 </Query>
 </QueryList>]]>
 </Query>
